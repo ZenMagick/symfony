@@ -231,7 +231,7 @@ class YamlFileLoader extends FileLoader
      *
      * @return array The file content
      */
-    private function loadFile($file)
+    protected function loadFile($file)
     {
         return $this->validate(Yaml::parse($file), $file);
     }
@@ -246,7 +246,7 @@ class YamlFileLoader extends FileLoader
      *
      * @throws InvalidArgumentException When service file is not valid
      */
-    private function validate($content, $file)
+    protected function validate($content, $file)
     {
         if (null === $content) {
             return $content;
