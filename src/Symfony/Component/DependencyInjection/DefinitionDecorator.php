@@ -54,6 +54,16 @@ class DefinitionDecorator extends Definition
     }
 
     /**
+     * Sets the parent being decorated.
+     *
+     * @param parent The parent id.
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
      * Returns all changes tracked for the Definition object.
      *
      * @return array An array of changes for this Definition
