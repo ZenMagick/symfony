@@ -41,7 +41,7 @@ class YamlFileLoader extends FileLoader
 
         $content = $this->loadFile($path);
 
-        $this->container->addResource(new FileResource($path));
+        $this->addResource($path);
 
         // empty file
         if (null === $content) {
@@ -63,6 +63,16 @@ class YamlFileLoader extends FileLoader
 
         // services
         $this->parseDefinitions($content, $file);
+    }
+
+    /**
+     * Add the given resource to the container.
+     *
+     * @param mixed  $path The resource
+     */
+    protected function addResource($path)
+    {
+        $this->container->addResource(new FileResource($path));
     }
 
     /**
