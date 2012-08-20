@@ -46,10 +46,10 @@ class YamlFileLoader extends FileLoader
     {
         $path = $this->locator->locate($file);
 
-        $config = Yaml::parse($path);
+        $config = $this->loadYaml($path);
 
         $collection = new RouteCollection();
-        $collection->addResource(new FileResource($path));
+        $this->addResource($collection, $path);
 
         // empty file
         if (null === $config) {
@@ -89,6 +89,26 @@ class YamlFileLoader extends FileLoader
     public function supports($resource, $type = null)
     {
         return is_string($resource) && 'yml' === pathinfo($resource, PATHINFO_EXTENSION) && (!$type || 'yaml' === $type);
+    }
+
+    /**
+     * Add a resource to the given colllection.
+     *
+     * @param RouteCollection $collection The route collection
+     * @param string $path The path
+     */
+    protected function addResource(RouteCollection $collection, $path) {
+        $collection->addResource(new FileResource($path));
+    }
+
+    /**
+     * Load yaml for the given path;
+     *
+     * @param mixed $path The path.
+     * @return array The YAML.
+     */
+    protected function loadYaml($path) {
+        return Yaml::parse($path);
     }
 
     /**
